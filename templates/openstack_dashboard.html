@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <div class="mdl-layout-spacer"></div>
+    <main class="mdl-layout__content">
+        <div class="mdl-grid">
+            <span class="mdl-layout-title">VM Instances</span>
+            <div class="mdl-layout-spacer"></div>
+            {% with form_object="createbutton", button_icon="backup", button_text="Create Instance", button_value="createbuttonvalue" %}
+                {% include "subtemplates/_plain_button.html" %}
+            {% endwith %}
+            {% with form_object="refreshbutton", button_icon="refresh", button_text="Refresh", button_value="refreshbuttonvalue" %}
+                {% include "subtemplates/_plain_button.html" %}
+            {% endwith %}
+            {% with form_object="startbutton", button_icon="arrow_right", button_text="Start", button_value="startbuttonvalue" %}
+                {% include "subtemplates/_plain_button_disabled.html" %}
+            {% endwith %}
+            {% with form_object="stopbutton", button_icon="stop", button_text="Stop", button_value="stopbuttonvalue" %}
+                {% include "subtemplates/_plain_button.html" %}
+            {% endwith %}
+        </div>
+        <div class="mdl-layout-spacer"></div>
+        {% with form_object="table", table_list=["Start", "Stop"], table_header=["Name", "Status", "Server ID", "External IP", "Internal IP"],  url_for_value='openstack.openstack_dashboard'  %}
+            {% include "subtemplates/_table_object.html" %}
+        {% endwith %}
+        <div class="mdl-layout-spacer"></div>
+        <script>
+        (function() {
+          'use strict';
+          window['counter'] = 0;
+          var snackbarContainer = document.querySelector('#demo-toast-example');
+          var showToastButton = document.querySelector('#createbutton');
+          showToastButton.addEventListener('click', function() {
+            'use strict';
+            var data = "Stopping Instance now!";
+            snackbarContainer.MaterialSnackbar.showSnackbar(data);
+          });
+        }());
+        </script>
+    </main>
+    <div class="mdl-layout-spacer"></div>
+{% endblock %}

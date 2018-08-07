@@ -1,0 +1,8 @@
+main:
+    admin: [
+        link: [
+              page: 'openstack.openstack_dashboard',
+              icon: 'memory',
+              title: 'Compute'
+            ]
+      ]
